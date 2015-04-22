@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Amazon Web Store</title>
+<script src="/jquery-1.11.0.min.js"></script>
+<script>
+$( document ).ready(function() {
+$("#header").load("header.ejs");
+$( "#signup" ).click(function( event ) {
+
+var fname=document.forms["createForm"]["firstname"].value;
+var lname=document.forms["createForm"]["lastname"].value;
+var email=document.forms["createForm"]["email"].value;
+var password=document.forms["createForm"]["password"].value;
+var conf=document.forms["createForm"]["conf"].value;
+var atpos=email.indexOf("@");
+var dotpos=email.lastIndexOf(".");
+if (fname==null || fname=="" || lname==null || lname=="" ||email==null || email=="" ||password==null || password=="")
+  {
+  alert("Please fill in all fields");  
+  } 
+else if (atpos<1 || dotpos<atpos+2 || dotpos+2>=email.length)
+  {
+  alert("Please give a valid e-mail address"); 
+  }
+  else if (password != conf)
+  {
+  alert("Please confirm your password."); 
+  }
+  else
+  {
+  	$( "#createForm" ).submit();
+  }
+
+});
+});
+</script>
+</head>
+<body>
+<div id="header"></div><br />
+<h2>Create a new account</h2>
+<form name="createForm" id="createForm" action="/createUser" method="post">
+<b>First Name:</b><input type="text" name="firstname" id="firstname"></input><br/> <br/>
+<b>Last Name:</b><input type="text" name="lastname" id="lastname"></input><br/> <br/>
+<b>Email:</b><input type="text" name="email" id="email"></input><br/> <br/>
+<b>Password:</b><input type="password" name="password" id="password"></input><br/> <br/>
+<b>Confirm Password:</b><input type="password" name="conf" id="conf"></input><br/> <br/>
+<input type="submit" name="submit" id="signup" value="Sign Up"/><br />
+</form>
+</body>
+</html>
